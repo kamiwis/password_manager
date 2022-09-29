@@ -7,7 +7,7 @@ To personalize the file, you can uncomment the EMAIL constant variable, save you
 to is as a string. Next, uncomment line 77 - under the comment '# Uncomment following row if you
 would like a constant EMAIL to be populated in Email/Username'
 
-This application utilizes the `tkinter` module, `messagebox` from `tkinter` and 
+This application utilizes the `tkinter` module, `messagebox` from `tkinter`, 'pyperclip' and 
 `password_generator` module.
 """
 from tkinter import *
@@ -16,7 +16,7 @@ from password_generator import password_generator
 import pyperclip
 
 # Uncomment EMAIL constant and change to your email if you would like to autopopulate your email
-#EMAIL = "kamila@gmail.com"
+#EMAIL = ""
 
 
 def generate_password():

@@ -13,7 +13,7 @@ This application utilizes the `tkinter` module, `messagebox` from `tkinter` and
 from tkinter import *
 from tkinter import messagebox
 from password_generator import password_generator
-#import pyperclip
+import pyperclip
 
 # Uncomment EMAIL constant and change to your email if you would like to autopopulate your email
 #EMAIL = "kamila@gmail.com"
@@ -24,6 +24,8 @@ def generate_password():
     generated password and inserts it into the password Entry field."""
     if len(password.get()) == 0:
         password.insert(0, password_generator())
+        # Copy password to clipboard.
+        pyperclip.copy(password.get())
 
 def save_password():
     """Saves the current information to data.txt."""

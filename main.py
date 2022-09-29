@@ -5,6 +5,9 @@ passwords as a .txt file.
 """
 from tkinter import *
 
+# Uncomment EMAIL constant and change to your email if you would like to autopopulate your email
+EMAIL = "kamila@gmail.com"
+
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
 
 # ---------------------------- SAVE PASSWORD ------------------------------- #
@@ -34,8 +37,11 @@ password_label.grid(row=3, column=0)
 # Create input fields and place in grid.
 website = Entry(width=35)
 website.grid(row=1, column=1, columnspan=2)
+website.focus()
 email_username = Entry(width=35)
 email_username.grid(row=2, column=1, columnspan=2)
+# Uncomment following row if you would like a constant EMAIL to be populated in Email/Username
+email_username.insert(0, EMAIL)
 password = Entry(width=18)
 password.grid(row=3, column=1)
 

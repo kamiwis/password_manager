@@ -46,15 +46,20 @@ def save_password():
     else:
         try:
             with open("data.json", "r") as f:
+                # Read existing data.
                 data = json.load(f)
-                data.update(new_data)
+        except FileNotFoundError:
             with open("data.json", "w") as f:
+                json.dump(new_data, f, indent=4)
+        else:
+            # Update existing data with new data.
+            data.update(new_data)
+
+            with open("data.json", "w") as f:
+                # Save updated data to file.
                 json.dump(data, f, indent=4)
             website.delete(0, END)
             password.delete(0, END)
-        except (json.decoder.JSONDecodeError, FileNotFoundError):
-            with open("data.json", "w") as f:
-                json.dump(new_data, f, indent=4)
 
 # Create a window for application interface.
 window = Tk()

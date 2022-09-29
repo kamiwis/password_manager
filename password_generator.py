@@ -13,6 +13,8 @@ Attributes:
     numbers (list): list of (int) containing numbers from 0 - 9.
     symboles (list): list of (str) containing all symbols that can be included in password.
 
+This file can be imported as a module and contains the following functions:
+    *password_generator() - Generates a password with random letters, numbers, and symbols.
 """
 from random import choice, randint, shuffle
 

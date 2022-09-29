@@ -7,11 +7,12 @@ To personalize the file, you can uncomment the EMAIL constant variable, save you
 to is as a string. Next, uncomment line 77 - under the comment '# Uncomment following row if you
 would like a constant EMAIL to be populated in Email/Username'
 
-This application utilizes the `tkinter` module, `messagebox` from `tkinter`, 'pyperclip' and 
-`password_generator` module.
+This script requires that `pyperclip` be installed within the Python environment you are 
+running this script in.
 """
 from tkinter import *
 from tkinter import messagebox
+import json
 from password_generator import password_generator
 import pyperclip
 
@@ -29,23 +30,31 @@ def generate_password():
 
 def save_password():
     """Saves the current information to data.txt."""
-    # Ask user if the information entered is correct to ensure they want to save.
-    is_correct = messagebox.askokcancel(title=website, message=f"Saving these details:\nEmail: "
-    f"{email_username.get()}\nPassword: {password.get()}\nWebsite: {website.get()}\n OK to save?")
     # Save information to file.
-    if is_correct:
-        with open("data.txt", "a") as f:
-            f.write(
-                f"{website.get()} | {email_username.get()} | {password.get()}\n")
-        website.delete(0, END)
-        password.delete(0, END)
+    website_data = website.get()
+    email_data = email_username.get()
+    password_data = password.get()
+    new_data = {
+        website_data: {
+            "email": email_data,
+            "password": password_data
+        }
+    }
 
-def complete_input():
-    """Checks that all input fields have been completed before saving."""
     if len(website.get()) == 0 or len(password.get()) == 0:
         messagebox.showinfo(title="Oops", message="Please complete all fields")
     else:
-        save_password()
+        try:
+            with open("data.json", "r") as f:
+                data = json.load(f)
+                data.update(new_data)
+            with open("data.json", "w") as f:
+                json.dump(data, f, indent=4)
+            website.delete(0, END)
+            password.delete(0, END)
+        except (json.decoder.JSONDecodeError, FileNotFoundError):
+            with open("data.json", "w") as f:
+                json.dump(new_data, f, indent=4)
 
 # Create a window for application interface.
 window = Tk()
@@ -83,7 +92,7 @@ password.grid(row=3, column=1)
 # Create buttons and place in grid.
 generate_button = Button(text="Generate Password", command=generate_password)
 generate_button.grid(row=3, column=2)
-add_button = Button(text="Add", width=36, command=complete_input)
+add_button = Button(text="Add", width=36, command=save_password)
 add_button.grid(row=4, column=1, columnspan=2)
 
 window.mainloop()

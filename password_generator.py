@@ -19,4 +19,4 @@ def password_generator():
     password = password_letters + password_symbols + password_numbers
     shuffle(password)
 
-    return password
+    return "".join(password)

@@ -18,7 +18,9 @@ from password_generator import password_generator
 EMAIL = "kamila@gmail.com"
 
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
-
+def generate_password():
+    if len(password.get()) == 0:
+        password.insert(0, password_generator())  
 
 # ---------------------------- SAVE PASSWORD ------------------------------- #
 def save_password():
@@ -75,7 +77,7 @@ password = Entry(width=18)
 password.grid(row=3, column=1)
 
 # Create buttons and place in grid.
-generate_button = Button(text="Generate Password")
+generate_button = Button(text="Generate Password", command=generate_password)
 generate_button.grid(row=3, column=2)
 add_button = Button(text="Add", width=36, command=complete_input)
 add_button.grid(row=4, column=1, columnspan=2)

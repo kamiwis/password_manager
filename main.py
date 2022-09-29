@@ -2,6 +2,8 @@
 
 This application allows the user to generate new passwords, and store their new or existing 
 passwords as a .txt file.
+
+To personalize the file, you can uncomment the EMAIL constant variable, save it to your 
 """
 from tkinter import *
 
@@ -11,6 +13,11 @@ EMAIL = "kamila@gmail.com"
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
 
 # ---------------------------- SAVE PASSWORD ------------------------------- #
+def save_password():
+    with open("data.txt", "a") as f:
+        f.write(f"{website.get()} | {email_username.get()} | {password.get()}\n")
+    website.delete(0, END)
+    password.delete(0, END)
 
 # ---------------------------- UI SETUP ------------------------------- #
 # Create a window for application.
@@ -48,7 +55,7 @@ password.grid(row=3, column=1)
 # Create buttons and place in grid.
 generate_button = Button(text="Generate Password")
 generate_button.grid(row=3, column=2)
-add_button = Button(text="Add", width=36)
+add_button = Button(text="Add", width=36, command=save_password)
 add_button.grid(row=4, column=1, columnspan=2)
 
 

@@ -33,6 +33,12 @@ def save_password():
         website.delete(0, END)
         password.delete(0, END)
 
+def complete_input():
+    """Checks that all input fields have been completed before saving."""
+    if len(website.get()) == 0 or len(password.get()) == 0:
+        messagebox.showinfo(title="Oops", message="Please complete all fields")
+    else:
+        save_password()
 
 # ---------------------------- UI SETUP ------------------------------- #
 # Create a window for application.
@@ -70,7 +76,7 @@ password.grid(row=3, column=1)
 # Create buttons and place in grid.
 generate_button = Button(text="Generate Password")
 generate_button.grid(row=3, column=2)
-add_button = Button(text="Add", width=36, command=save_password)
+add_button = Button(text="Add", width=36, command=complete_input)
 add_button.grid(row=4, column=1, columnspan=2)
 
 window.mainloop()

@@ -3,21 +3,36 @@
 This application allows the user to generate new passwords, and store their new or existing 
 passwords as a .txt file.
 
-To personalize the file, you can uncomment the EMAIL constant variable, save it to your 
+To personalize the file, you can uncomment the EMAIL constant variable, save your email address
+to is as a string. Next, uncomment line 52 - under the comment '# Uncomment following row if you
+would like a constant EMAIL to be populated in Email/Username'
+
+This application utilizes the `tkinter` module and `messagebox` from `tkinter`.
+
 """
 from tkinter import *
+from tkinter import messagebox
 
 # Uncomment EMAIL constant and change to your email if you would like to autopopulate your email
 EMAIL = "kamila@gmail.com"
 
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
 
+
 # ---------------------------- SAVE PASSWORD ------------------------------- #
 def save_password():
-    with open("data.txt", "a") as f:
-        f.write(f"{website.get()} | {email_username.get()} | {password.get()}\n")
-    website.delete(0, END)
-    password.delete(0, END)
+    """Saves the current information to data.txt."""
+    # Ask user if the information entered is correct.
+    is_correct = messagebox.askokcancel(title=website, message=f"Saving these details:\nEmail: "
+    f"{email_username.get()}\nPassword: {password.get()}\nWebsite: {website.get()}\n OK to save?")
+    # Save information to file.
+    if is_correct:
+        with open("data.txt", "a") as f:
+            f.write(
+                f"{website.get()} | {email_username.get()} | {password.get()}\n")
+        website.delete(0, END)
+        password.delete(0, END)
+
 
 # ---------------------------- UI SETUP ------------------------------- #
 # Create a window for application.
@@ -57,8 +72,5 @@ generate_button = Button(text="Generate Password")
 generate_button.grid(row=3, column=2)
 add_button = Button(text="Add", width=36, command=save_password)
 add_button.grid(row=4, column=1, columnspan=2)
-
-
-
 
 window.mainloop()

@@ -12,6 +12,7 @@ This application utilizes the `tkinter` module and `messagebox` from `tkinter`.
 """
 from tkinter import *
 from tkinter import messagebox
+from password_generator import password_generator
 
 # Uncomment EMAIL constant and change to your email if you would like to autopopulate your email
 EMAIL = "kamila@gmail.com"

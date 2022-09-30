@@ -64,17 +64,16 @@ def save_password():
     
 def retrieve_data():
     website_to_find = website.get()
-    # Open json file
     try:
+        # Open json file
         with open("data.json", "r") as data_file:
             data = json.load(data_file)
     except FileNotFoundError:
         messagebox.showinfo(title="Error", message="No Data File Found")
-
     else:
         if website_to_find in data:
-            email_data = website_data["email"]
-            password_data = website_data["password"]
+            email_data = data[website_to_find]["email"]
+            password_data = data[website_to_find]["password"]
             messagebox.showinfo(title=website_to_find, message=f"Email: {email_data} \nPassword: {password_data}")
         else:
             messagebox.showinfo(title="Error", message=f"No details found for {website_to_find}")

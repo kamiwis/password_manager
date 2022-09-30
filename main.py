@@ -58,8 +58,26 @@ def save_password():
             with open("data.json", "w") as f:
                 # Save updated data to file.
                 json.dump(data, f, indent=4)
+        finally:
             website.delete(0, END)
             password.delete(0, END)
+    
+def retrieve_data():
+    website_to_find = website.get()
+    # Open json file
+    try:
+        with open("data.json", "r") as data_file:
+            data = json.load(data_file)
+    except FileNotFoundError:
+        messagebox.showinfo(title="Error", message="No Data File Found")
+
+    else:
+        if website_to_find in data:
+            email_data = website_data["email"]
+            password_data = website_data["password"]
+            messagebox.showinfo(title=website_to_find, message=f"Email: {email_data} \nPassword: {password_data}")
+        else:
+            messagebox.showinfo(title="Error", message=f"No details found for {website_to_find}")
 
 # Create a window for application interface.
 window = Tk()
@@ -84,8 +102,8 @@ password_label = Label(text="Password:")
 password_label.grid(row=3, column=0)
 
 # Create input fields and place in grid.
-website = Entry(width=35)
-website.grid(row=1, column=1, columnspan=2)
+website = Entry(width=18)
+website.grid(row=1, column=1)
 website.focus()
 email_username = Entry(width=35)
 email_username.grid(row=2, column=1, columnspan=2)
@@ -99,5 +117,7 @@ generate_button = Button(text="Generate Password", command=generate_password)
 generate_button.grid(row=3, column=2)
 add_button = Button(text="Add", width=36, command=save_password)
 add_button.grid(row=4, column=1, columnspan=2)
+search_button = Button(text="Search", width=13, command=retrieve_data)
+search_button.grid(row=1, column=2)
 
 window.mainloop()

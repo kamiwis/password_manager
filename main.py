@@ -89,7 +89,7 @@ window.config(bg="white")
 # Create canvas for window.
 canvas = Canvas(width=200, height=200, bg="white", highlightthickness=0)
 # Create PhotoImage in order to use image on canvas.
-logo = PhotoImage(file="logo.png")
+logo = PhotoImage(file="Untitled-2.png")
 # Adds logo image to canvas and displays it in the center of the canvas.
 canvas.create_image(100, 100, image=logo)
 canvas.grid(row=0, column=1)
@@ -103,14 +103,14 @@ password_label = Label(text="Password:", bg="white", fg="black")
 password_label.grid(row=3, column=0)
 
 # Create input fields and place in grid.
-website = Entry(width=18, bg="white", fg="black", bd=0)
+website = Entry(width=18, bg="grey", fg="black", bd=0)
 website.grid(row=1, column=1)
 website.focus()
-email_username = Entry(width=35, bg="white", fg="black", bd=0)
+email_username = Entry(width=35, bg="grey", fg="black", bd=0)
 email_username.grid(row=2, column=1, columnspan=2)
 # Uncomment following row if you would like a constant EMAIL to be populated in Email/Username
 #email_username.insert(0, EMAIL)
-password = Entry(width=18, bg="white", fg="black", bd=0)
+password = Entry(width=18, bg="grey", fg="black", bd=0)
 password.grid(row=3, column=1)
 
 # Create buttons and place in grid.
